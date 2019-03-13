@@ -39,6 +39,12 @@ const normalizedData = normalize(originalData, article);
 @[3-8](Define schemas)
 @[17](Run it)
 ---
+# FA icons
+@fa[thumbs-up](Sounds good to me!)
+@fab[docker]
+@fab[digital-ocean text-bold](Digital Ocean)
+@fa[umbrella fa-7x fa-flip-horizontal fa-pulse]
+---
 ## Add Some Slide Candy
 
 ![](assets/img/presentation.png)
