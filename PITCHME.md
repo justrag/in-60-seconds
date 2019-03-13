@@ -1,4 +1,4 @@
-# Let's Get Started
+# Redux Best Practices
 
 ---?color=#000
 # Code
@@ -6,15 +6,17 @@
 ## How to  Code
 +++
 ### Inline
-There are many different ways to style code with GitHub's markdown. If you have inline code blocks, wrap them in backticks: `var example = true`.  If you've got a longer block of code, you can indent with four spaces:
-
+There are many different ways to style code with GitHub's markdown.
+If you have inline code blocks, wrap them in backticks: `const isDone = true`.
++++
+### 4-spaces indent
+If you've got a longer block of code, you can indent with four spaces:
     if (isAwesome){
       return true
     }
 +++
 ### Code fencing
 GitHub also supports something called code fencing, which allows for multiple lines without indentation:
-
 ```
 if (isAwesome){
   return true
@@ -23,7 +25,6 @@ if (isAwesome){
 +++
 ### Syntax highlighting
 And if you'd like to use syntax highlighting, include the language:
-
 ```javascript
 if (isAwesome){
   return true
