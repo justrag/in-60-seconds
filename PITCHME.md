@@ -9,6 +9,10 @@
 ---
 # Selectors
 +++
+### reselect
+---
+# Data normalization
++++
 ### normalizr
 ```javascript
 import { normalize, schema } from 'normalizr';
