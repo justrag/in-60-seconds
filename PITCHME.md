@@ -45,6 +45,26 @@ const normalizedData = normalize(originalData, article);
 @fab[digital-ocean text-bold](Digital Ocean)
 @fa[umbrella fa-7x fa-flip-horizontal fa-pulse]
 ---
+# Lists
++++
+## Unordered
+@ul
+
+- Plain text list item
+- Rich **markdown** list *item*
+- Link [within](https://gitpitch.com) list item
+
+@ulend
++++
+## Ordered
+@ol
+
+- Plain text list item
+- Rich **markdown** list *item*
+- Link [within](https://gitpitch.com) list item
+
+@olend
+---
 ## Add Some Slide Candy
 
 ![](assets/img/presentation.png)
