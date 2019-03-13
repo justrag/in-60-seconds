@@ -30,7 +30,7 @@ if (isAwesome){
 }
 ```
 +++
-###Code presenting
+### Code presenting
 ```javascript
 import { normalize, schema } from 'normalizr';
 
