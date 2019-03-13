@@ -49,11 +49,10 @@ const article = new schema.Entity('articles', {
 });
 
 const normalizedData = normalize(originalData, article);
+```
 @[1](Import)
 @[3-8](Define schemas)
 @[17](Run it)
-```
-
 ---
 
 ## Add Some Slide Candy
