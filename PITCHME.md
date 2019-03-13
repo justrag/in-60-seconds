@@ -65,6 +65,10 @@ const normalizedData = normalize(originalData, article);
 
 @olend
 ---
+Images
+![Logo](assets/img/yorick.jpg)
+![Logo](https://www.dvdplanetstore.pk/wp-content/uploads/2018/01/bYkwHCFjJ18EYSOMS1NwlhoVa8C.jpg)
+---
 ## Add Some Slide Candy
 
 ![](assets/img/presentation.png)
