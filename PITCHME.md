@@ -1,38 +1,15 @@
 # Redux Best Practices
 
 ---?color=#000
-# Code
+# Action vs reducer
 +++
-## How to  Code
+## Mutiple reducers on one action
+---
+# Middleware
+---
+# Selectors
 +++
-### Inline
-There are many different ways to style code with GitHub's markdown.
-If you have inline code blocks, wrap them in backticks: `const isDone = true`.
-+++
-### 4-spaces indent
-If you've got a longer block of code, you can indent with four spaces:
-
-    if (isAwesome){
-      return true
-    }
-+++
-### Code fencing
-GitHub also supports something called code fencing, which allows for multiple lines without indentation:
-```
-if (isAwesome){
-  return true
-}
-```
-+++
-### Syntax highlighting
-And if you'd like to use syntax highlighting, include the language:
-```javascript
-if (isAwesome){
-  return true
-}
-```
-+++
-### Code presenting
+### normalizr
 ```javascript
 import { normalize, schema } from 'normalizr';
 
@@ -56,7 +33,6 @@ const normalizedData = normalize(originalData, article);
 @[3-8](Define schemas)
 @[17](Run it)
 ---
-
 ## Add Some Slide Candy
 
 ![](assets/img/presentation.png)
