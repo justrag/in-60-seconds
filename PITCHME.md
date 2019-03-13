@@ -11,8 +11,10 @@
 +++
 ### reselect
 ---
+@transition[convex concave]
 # Data normalization
 +++
+@transition[slide-in zoom-out]
 ### normalizr
 ```javascript
 import { normalize, schema } from 'normalizr';
