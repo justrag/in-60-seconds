@@ -73,6 +73,14 @@ console.log(actionCreator.type);
 +++
 @quote[(...) you generally have "app-specific components that need to be connected to Redux", and "truly generic components that probably aren't going to get connected, or if they are, will be connected many times for different parts of the app" so if you're trying to structure things as, say, `components/UserList/UserList.jsx`, and `containers/UserListContainer/UserListContainer.jsx`, that's overkill. Just put both of them in one file, `export class UserList`, and `export default connect(mapState)(UserList)`](Mark Erikson)
 ---
+# Immutability
++++
+Immutable.js
+If we never change the store directly, only thorugh "CRUD"-style actions/reducers, how would we ever mutate the store?
+toJS() bad in mapStateToProps()?
++++
+## redux-immutable-state-invariant
+---
 # Middleware
 +++
 ```javascript
