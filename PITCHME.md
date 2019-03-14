@@ -55,9 +55,31 @@ console.log(actionCreator.type);
 ```
 ---
 ## Reducers and action creators aren't a one-to-one mapping
++++
 @quote[Many reducers may handle one action. One reducer may handle many actions. Putting them together negates many benefits of how Flux and Redux application scale. This leads to code bloat and unnecessary coupling. You lose the flexibility of reacting to the same action from different places, and your action creators start to act like “setters”, coupled to a specific state shape, thus coupling the components to it as well.](Dan Abramov)
++++
+@quote[The point of having reducers is that actions aren't coupled to reducers.](Dan Abramov)
++++
+@quote[The point of Flux and Redux is to make it easy to suddenly start reacting to the same action in a different place. You don’t know which actions you’ll need to handle in different places in advance.](Dan Abramov)
++++
+@quote[This patterns grinds your productivity to a screeching halt when requirements change and your application suddenly needs to dispatch actions and respond to slices of your state that break this pattern. That’s what makes this pattern so dangerous. It’s important to recognize the red-flags associated with this pattern before it turns into a daunting task to rework your application state.](Steven Scaffidi)
+
+---
+## Should I only connect my top component, or can I connect multiple components in my tree?
++++
+@quote[Emphasizing “one container component at the top” in Redux examples was a mistake. Don't take this as a maxim. Try to keep your presentation components separate. Create container components by connecting them when it's convenient. Whenever you feel like you're duplicating code in parent components to provide data for same kinds of children, time to extract a container. Generally as soon as you feel a parent knows too much about “personal” data or actions of its children, time to extract a container.](redux.js.org FAQ)
+---
+## Component/container separation
++++
+@quote[(...) you generally have "app-specific components that need to be connected to Redux", and "truly generic components that probably aren't going to get connected, or if they are, will be connected many times for different parts of the app" so if you're trying to structure things as, say, components/UserList/UserList.jsx, and containers/UserListContainer/UserListContainer.jsx, that's overkill. Just put both of them in one file, export class UserList, and export default connect(mapState)(UserList)](Mark Erikson)
 ---
 # Middleware
++++
+```javascript
+const myMiddleware = store => next => action => {
+  return next(action)
+}
+```
 ---
 # Selectors
 +++
