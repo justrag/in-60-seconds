@@ -1,9 +1,61 @@
 # Redux Best Practices
-
----?color=#000
-# Action vs reducer
+---
+# Constants
 +++
-## Mutiple reducers on one action
+## Why are we using constants?
+```javascript
+// constants/todo.js
+const ADD_TODO = 'ADD_TODO'
+
+// actions/todo.js
+import { ADD_TODO } from '../constants/todo'
+const addTodo = title => (
+  {
+    type: ADD_TODO,
+    payload: title
+  }
+)
+export addTodo
+```
+@[1-2](constant)
+@[3-10](action)
++++
+## Problem?
+```javascript
+// constants/view/campaign/list.js
+import defineActionTypes from '../../../../utils/defineActionTypes';
+
+export default defineActionTypes('CAMPAIGN_LIST', {
+  DELETE: `
+    SUBMIT
+  `,
+});
+
+// sagas/view/campaign/list.js
+import T from '../../../constants/view/campaign/list';
+
+function* submitDeleteSaga() {
+  yield takeLatest(T.DELETE.SUBMIT, submitDelete);
+}
+```
+@[1-8](object of constants)
+@[10-15](saga)
+@[14](runtime error? silent error?)
++++
+## Solution
+```javascript
+import { createAction } from 'redux-starter-kit'
+const actionCreator = createAction("SOME_ACTION_TYPE");
+
+console.log(actionCreator.toString())
+// -> "SOME_ACTION_TYPE"
+
+console.log(actionCreator.type);
+// -> "SOME_ACTION_TYPE"
+```
+---
+## Reducers and action creators aren't a one-to-one mapping
+@quote[Many reducers may handle one action. One reducer may handle many actions. Putting them together negates many benefits of how Flux and Redux application scale. This leads to code bloat and unnecessary coupling. You lose the flexibility of reacting to the same action from different places, and your action creators start to act like “setters”, coupled to a specific state shape, thus coupling the components to it as well.](Dan Abramov)
 ---
 # Middleware
 ---
