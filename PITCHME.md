@@ -75,23 +75,99 @@ console.log(actionCreator.type);
 ---
 # Immutability
 +++
+## Best Practices for using Immutable.JS with Redux?
+@ul
+- Never mix plain JavaScript objects with Immutable.JS
+- Limit your use of toJS()
+- Never use toJS() in mapStateToProps
+- Use Immutable.JS objects in your Smart Components
+- Never use Immutable.JS in your Dumb Components
+- Use a Higher Order Component to convert your Smart Component’s Immutable.JS props to your Dumb Component’s JavaScript props
+@ulend
++++
 Immutable.js
-If we never change the store directly, only thorugh "CRUD"-style actions/reducers, how would we ever mutate the store?
+If we never change the store directly, only through "CRUD"-style actions/reducers, how would we ever mutate the store?
 toJS() bad in mapStateToProps()?
 +++
-## redux-immutable-state-invariant
+## Alternative: redux-immutable-state-invariant
+
+```javascript
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+const enhancer = applyMiddleware(
+  someOtherMiddleware,
+  reduxImmutableStateInvariant()
+);
+const store = createStore(reducer, enhancer);
+```
+
 ---
 # Middleware
 +++
 ```javascript
-const myMiddleware = store => next => action => {
+const noopMiddleware = store => next => action => {
   return next(action)
 }
 ```
++++
+```javascript
+// logger middleware
+// console.debug the whole action
+const logger = store => next => action => {
+  console.debug("%o",action);
+  return next(action);
+};
+```
++++
+```javascript
+import { addFlashMessage, removeFlashMessage } from '../actions/';
+// flash messages middleware
+// checks for meta.flash
+// dispatches addFlashMessage
+// and schedules the removal of the flash message after meta.flash.duration
+let nextFlashMessageId = 1;
+const flash = ({ getState, dispatch }) => next => action => {
+  if (action.meta && action.meta.flash) {
+    const { type, text, duration } = action.meta.flash;
+    const id = nextFlashMessageId;
+    nextFlashMessageId += 1;
+    dispatch(addFlashMessage(id, type, text, duration));
+    if (duration !== false) {
+      setTimeout(() => {
+        dispatch(removeFlashMessage(id));
+      }, duration);
+    }
+  }
+  return next(action);
+};
+```
 ---
 # Selectors
+examples from our code
 +++
 ### reselect
+```javascript
+import { createSelector } from 'reselect'
+
+const shopItemsSelector = state => state.shop.items
+const taxPercentSelector = state => state.shop.taxPercent
+
+const subtotalSelector = createSelector(
+  shopItemsSelector,
+  items => items.reduce((acc, item) => acc + item.value, 0)
+)
+
+const taxSelector = createSelector(
+  subtotalSelector,
+  taxPercentSelector,
+  (subtotal, taxPercent) => subtotal * (taxPercent / 100)
+)
+
+export const totalSelector = createSelector(
+  subtotalSelector,
+  taxSelector,
+  (subtotal, tax) => ({ total: subtotal + tax })
+)
+```
 ---
 @transition[convex concave]
 # Data normalization
