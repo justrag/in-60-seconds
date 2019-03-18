@@ -2,7 +2,7 @@
 ---
 # Constants
 +++
-## Why are we using constants?
+## Why are constants for?
 ```javascript
 // constants/todo.js
 const ADD_TODO = 'ADD_TODO'
@@ -42,7 +42,8 @@ function* submitDeleteSaga() {
 @[10-15](saga)
 @[14](runtime error? silent error?)
 +++
-## Solution
+## Possible solution
+### don't refer to constants, only to actions
 ```javascript
 import { createAction } from 'redux-starter-kit'
 const actionCreator = createAction("SOME_ACTION_TYPE");
