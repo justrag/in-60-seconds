@@ -1,8 +1,8 @@
 # Redux Best Practices
 ---
-# Constants
+## Constants
 +++
-## What are constants for?
+### What are constants for?
 ```javascript
 // constants/todo.js
 const ADD_TODO = 'ADD_TODO'
@@ -20,7 +20,7 @@ export addTodo
 @[1-2](constant)
 @[3-10](action)
 +++
-## Problem?
+### Problem?
 ```javascript
 // constants/view/campaign/list.js
 import defineActionTypes from '../../../../utils/defineActionTypes';
@@ -42,7 +42,7 @@ function* submitDeleteSaga() {
 @[10-15](saga)
 @[14](runtime error? silent error?)
 +++
-## Possible solution
+### Possible solution:
 ### don't refer to constants, only to actions
 ```javascript
 import { createAction } from 'redux-starter-kit'
@@ -75,11 +75,11 @@ console.log(actionCreator.type);
 ---
 ## Component/container separation
 +++
-@quote[(...) you generally have "app-specific components that need to be connected to Redux", and "truly generic components that probably aren't going to get connected, or if they are, will be connected many times for different parts of the app" so if you're trying to structure things as, say, `components/UserList/UserList.jsx`, and `containers/UserListContainer/UserListContainer.jsx`, that's overkill. Just put both of them in one file, `export class UserList`, and `export default connect(mapState)(UserList)`](Mark Erikson)
+@quote[You generally have "app-specific components that need to be connected to Redux", and "truly generic components that probably aren't going to get connected, or if they are, will be connected many times for different parts of the app" so if you're trying to structure things as, say, `components/UserList/UserList.jsx`, and `containers/UserListContainer/UserListContainer.jsx`, that's overkill. Just put both of them in one file, `export class UserList`, and `export default connect(mapState)(UserList)`](Mark Erikson)
 ---
-# Immutability
+## Immutability
 +++
-## Best Practices for using Immutable.JS with Redux?
+### Best Practices for using Immutable.JS with Redux?
 @ul
 - Never mix plain JavaScript objects with Immutable.JS
 - Limit your use of toJS()
@@ -89,11 +89,11 @@ console.log(actionCreator.type);
 - Use a Higher Order Component to convert your Smart Component’s Immutable.JS props to your Dumb Component’s JavaScript props
 @ulend
 +++
-Immutable.js
+### Mutation?
 If we never change the store directly, only through "CRUD"-style actions/reducers, how would we ever mutate the store?
 toJS() bad in mapStateToProps()?
 +++
-## Alternative: redux-immutable-state-invariant
+### Alternative: redux-immutable-state-invariant
 
 ```javascript
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
@@ -105,7 +105,7 @@ const store = createStore(reducer, enhancer);
 ```
 
 ---
-# Middleware
+## (Custom) Middleware
 +++
 ```javascript
 const noopMiddleware = store => next => action => {
@@ -124,10 +124,11 @@ const logger = store => next => action => {
 +++
 ```javascript
 import { addFlashMessage, removeFlashMessage } from '../actions/';
-// flash messages middleware
-// checks for meta.flash
-// dispatches addFlashMessage
-// and schedules the removal of the flash message after meta.flash.duration
+/* flash messages middleware
+  checks for meta.flash
+  dispatches addFlashMessage
+  and schedules the removal of the flash message
+  after meta.flash.duration seconds */
 let nextFlashMessageId = 1;
 const flash = ({ getState, dispatch }) => next => action => {
   if (action.meta && action.meta.flash) {
