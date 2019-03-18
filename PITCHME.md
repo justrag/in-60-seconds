@@ -106,7 +106,7 @@ const store = createStore(reducer, enhancer);
 ```
 +++
     A state mutation was detected between dispatches,
-      in the path ui.loader
+      in the path: ui.loader
 
     A state mutation was detected inside a dispatch,
       in the path: data.entities
@@ -152,10 +152,24 @@ const flash = ({ getState, dispatch }) => next => action => {
 };
 ```
 ---
-# Selectors
-examples from our code
+## Selectors
 +++
-### reselect
+### access to piece of state
+```javascript
+const isInternational = campaign.getIn(['country', 'isAddressValidationSupported']);
+
+const showEmptyListInfoContent =
+  showEmptyListInfo
+  && automation.get('campaigns').size === 0
+  && unvalidated === 0
+  && deliverable === 0
+  && undeliverable === 0;
+```
++++
+### selector functions
+
++++
+### potential performance problems? reselect
 ```javascript
 import { createSelector } from 'reselect'
 
