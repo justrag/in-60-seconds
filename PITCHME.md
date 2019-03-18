@@ -91,15 +91,16 @@ console.log(actionCreator.type);
 +++
 ### Mutation?
 If we never change the store directly, only through "CRUD"-style actions/reducers, how would we ever mutate the store?
+###
 toJS() bad in mapStateToProps()?
 +++
 ### Alternative: redux-immutable-state-invariant
 
 ```javascript
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import immutableStateInvariant from 'redux-immutable-state-invariant';
 const enhancer = applyMiddleware(
   someOtherMiddleware,
-  reduxImmutableStateInvariant()
+  immutableStateInvariant()
 );
 const store = createStore(reducer, enhancer);
 ```
