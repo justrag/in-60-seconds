@@ -69,7 +69,7 @@ console.log(actionCreator.type);
 ## connect() - how often?
 +++
 ### Should I only connect my top component, or can I connect multiple components in my tree?
-@quote[Emphasizing “one container component at the top” in Redux examples was a mistake. Don't take this as a maxim. Try to keep your presentation components separate. Create container components by connecting them when it's convenient. Whenever you feel like you're duplicating code in parent components to provide data for same kinds of children, time to extract a container. Generally as soon as you feel a parent knows too much about “personal” data or actions of its children, time to extract a container.](redux.js.org FAQ)
+@quote[Emphasizing “one container component at the top” in Redux examples was a mistake. (...) Whenever you feel like you're duplicating code in parent components to provide data for same kinds of children, time to extract a container. Generally as soon as you feel a parent knows too much about “personal” data or actions of its children, time to extract a container.](redux.js.org FAQ)
 ---
 ## Component/container separation
 +++
