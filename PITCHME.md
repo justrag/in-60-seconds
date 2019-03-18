@@ -105,12 +105,11 @@ const enhancer = applyMiddleware(
 const store = createStore(reducer, enhancer);
 ```
 +++
-```
-'A state mutation was detected between dispatches,
-  in the path ui.loader'
-'A state mutation was detected inside a dispatch,
-  in the path: data.entities'
-```
+    A state mutation was detected between dispatches,
+      in the path ui.loader
+
+    A state mutation was detected inside a dispatch,
+      in the path: data.entities
 ---
 ## (Custom) Middleware
 +++
