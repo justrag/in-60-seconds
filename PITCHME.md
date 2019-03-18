@@ -167,7 +167,22 @@ const showEmptyListInfoContent =
 ```
 +++
 ### selector functions
-
+```javascript
+// Reducer
+const todo = (state = [], action) => {
+ switch (action.type) {
+   case GET_ALL_TODOS:
+     return {
+       todos: action.data.todos
+     };
+   default:
+     return state;
+ }
+}
+// Selector
+const getIncompleteTodos = state => 
+  state.todos.filter(todo => !todo.completed);
+```
 +++
 ### potential performance problems? reselect
 ```javascript
@@ -194,11 +209,30 @@ export const totalSelector = createSelector(
 )
 ```
 ---
-@transition[convex concave]
-# Data normalization
+## Data normalization
 +++
-@transition[slide-in zoom-out]
 ### normalizr
++++
+```javascript
+{
+  "id": "123",
+  "author": {
+    "id": "1",
+    "name": "Paul"
+  },
+  "title": "My awesome blog post",
+  "comments": [
+    {
+      "id": "324",
+      "commenter": {
+        "id": "2",
+        "name": "Nicole"
+      }
+    }
+  ]
+}
+```
++++
 ```javascript
 import { normalize, schema } from 'normalizr';
 
@@ -221,6 +255,29 @@ const normalizedData = normalize(originalData, article);
 @[1](Import)
 @[3-8](Define schemas)
 @[17](Run it)
++++
+```javascript
+{
+  result: "123",
+  entities: {
+    "articles": {
+      "123": {
+        id: "123",
+        author: "1",
+        title: "My awesome blog post",
+        comments: [ "324" ]
+      }
+    },
+    "users": {
+      "1": { "id": "1", "name": "Paul" },
+      "2": { "id": "2", "name": "Nicole" }
+    },
+    "comments": {
+      "324": { id: "324", "commenter": "2" }
+    }
+  }
+}
+```
 ---
 # FA icons
 @fa[thumbs-up](Sounds good to me!)
